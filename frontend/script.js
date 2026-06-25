@@ -4,7 +4,7 @@
    If the token is missing or expired, user is redirected to login.
    ============================================================ */
 
-const API_BASE = "http://localhost:3000/api";
+const API_BASE = "https://expense-tracker-9p2m.onrender.com/api";
 
 /* ----------------------------------------------------------
    AUTH HELPERS — token stored in sessionStorage
