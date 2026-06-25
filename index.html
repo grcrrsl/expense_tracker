@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Expense Tracker | Personal Finance Dashboard</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="navbar-left">
+    <div class="logo">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+        <rect width="34" height="34" rx="10" fill="url(#logoGrad)"/>
+        <path d="M9 21l4.5-5 4 3.5L23 12" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="34" y2="34">
+            <stop stop-color="#3B82F6"/>
+            <stop offset="1" stop-color="#22C55E"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <h1 class="app-title">Expense Tracker</h1>
+  </div>
+  <div class="navbar-right">
+    <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-label="Toggle dark and light mode">
+      <span id="themeIcon">🌙</span>
+    </button>
+  </div>
+</header>
+
+<main class="dashboard">
+
+  <!-- SUMMARY CARDS -->
+  <section class="summary-grid" id="summaryGrid">
+    <div class="summary-card fade-in" style="--delay:0s">
+      <div class="summary-icon balance"><i class="fa-solid fa-wallet"></i></div>
+      <div class="summary-info">
+        <span class="summary-label">Total Balance</span>
+        <span class="summary-value" id="totalBalance" data-target="0">₱0.00</span>
+      </div>
+    </div>
+    <div class="summary-card fade-in" style="--delay:.08s">
+      <div class="summary-icon income"> <i class="fa-solid fa-arrow-trend-up"></i></div>
+      <div class="summary-info">
+        <span class="summary-label">Total Income</span>
+        <span class="summary-value income-text" id="totalIncome" data-target="0">₱0.00</span>
+      </div>
+    </div>
+    <div class="summary-card fade-in" style="--delay:.16s">
+      <div class="summary-icon expense"><i class="fa-solid fa-arrow-trend-down"></i></div>
+      <div class="summary-info">
+        <span class="summary-label">Total Expenses</span>
+        <span class="summary-value expense-text" id="totalExpenses" data-target="0">₱0.00</span>
+      </div>
+    </div>
+    <div class="summary-card fade-in" style="--delay:.24s">
+      <div class="summary-icon savings"><i class="fa-solid fa-piggy-bank"></i></div>
+      <div class="summary-info">
+        <span class="summary-label">Savings</span>
+        <span class="summary-value savings-text" id="totalSavings" data-target="0">0%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET PROGRESS -->
+  <section class="budget-card fade-in" style="--delay:.3s">
+    <div class="budget-head">
+      <div>
+        <h3>Monthly Budget Goal</h3>
+        <p class="muted" id="budgetSubtext">Set a budget to track your spending limit.</p>
+      </div>
+      <button class="btn-ghost" id="setBudgetBtn">Set Budget</button>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="budgetProgressFill" style="width:0%"></div>
+    </div>
+    <div class="budget-foot">
+      <span id="budgetSpentLabel">Spent ₱0.00</span>
+      <span id="budgetGoalLabel">of ₱0.00</span>
+    </div>
+  </section>
+
+  <!-- MAIN GRID -->
+  <section class="main-grid">
+
+    <!-- TRANSACTION FORM -->
+    <div class="panel fade-in" style="--delay:.1s">
+      <h2 class="panel-title">Add Transaction</h2>
+      <form id="transactionForm" class="transaction-form" autocomplete="off">
+        <div class="form-group">
+          <label for="name">Transaction Name</label>
+          <input type="text" id="name" placeholder="e.g. Grocery shopping" />
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" placeholder="0.00" step="0.01" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category"></select>
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Transaction Type</label>
+          <div class="type-toggle">
+            <button type="button" class="type-btn income-type active" data-type="income">Income</button>
+            <button type="button" class="type-btn expense-type" data-type="expense">Expense</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn">
+          <span>Add Transaction</span>
+        </button>
+      </form>
+
+      <div class="stats-mini">
+        <h3 class="panel-subtitle">Quick Stats</h3>
+        <div class="mini-stat-row"><span>Highest Expense</span><strong id="highestExpense">—</strong></div>
+        <div class="mini-stat-row"><span>Most Used Category</span><strong id="mostUsedCategory">—</strong></div>
+        <div class="mini-stat-row"><span>This Month</span><strong id="monthlySummary">—</strong></div>
+      </div>
+    </div>
+
+    <!-- TRANSACTION HISTORY -->
+    <div class="panel fade-in" style="--delay:.2s">
+      <div class="history-head">
+        <h2 class="panel-title">Transaction History</h2>
+        <div class="history-tools">
+          <div class="search-box">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search transactions..."
+        class="search-input"
+    />
+</div>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <select id="filterType" class="filter-select">
+          <option value="all">All Types</option>
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+        <select id="filterCategory" class="filter-select">
+          <option value="all">All Categories</option>
+        </select>
+        <select id="sortBy" class="filter-select">
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="highest">Highest Amount</option>
+          <option value="lowest">Lowest Amount</option>
+        </select>
+      </div>
+
+      <div class="transaction-list" id="transactionList">
+        <!-- populated by JS -->
+      </div>
+
+      <p class="empty-state" id="emptyState" style="display:none;">No Transactions Found</p>
+
+      <div class="export-row">
+        <button class="btn-ghost" id="exportCsvBtn">
+            <i class="fa-solid fa-file-csv"></i>
+            Export CSV</button>
+        <label class="btn-ghost file-label" for="importCsvInput">
+            <i class="fa-solid fa-upload"></i>
+            Import CSV</label>
+        <input type="file" id="importCsvInput" accept=".csv" hidden />
+        <button class="btn-ghost" id="exportPdfBtn">
+            <i class="fa-solid fa-file-pdf"></i> 
+            Download PDF Report</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANALYTICS -->
+  <section class="analytics fade-in" style="--delay:.3s">
+    <h2 class="panel-title">Analytics Dashboard</h2>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>Expense by Category</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Monthly Expenses</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Income vs Expenses</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- TOAST CONTAINER -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- CONFIRM MODAL -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box">
+    <h3 id="confirmTitle">Delete this transaction?</h3>
+    <p class="muted">This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn-ghost" id="confirmCancel">Cancel</button>
+      <button class="btn-danger" id="confirmOk">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- BUDGET MODAL -->
+<div class="modal-overlay" id="budgetModal">
+  <div class="modal-box">
+    <h3>Set Monthly Budget Goal</h3>
+    <div class="form-group">
+      <label for="budgetInput">Budget Amount (₱)</label>
+      <input type="number" id="budgetInput" placeholder="e.g. 20000" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" id="budgetCancel">Cancel</button>
+      <button class="btn-primary" id="budgetSave"><span>Save Budget</span></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
