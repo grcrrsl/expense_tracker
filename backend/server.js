@@ -18,7 +18,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ── MIDDLEWARE ──────────────────────────────────────────────
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://expense-tracker-seven-hazel-79.vercel.app",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 // Serve frontend static files
