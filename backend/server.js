@@ -11,6 +11,8 @@ const transactionRoutes = require("./routes/transactions");
 const settingsRoutes    = require("./routes/settings");
 const requireAuth       = require("./middleware/auth");
 const errorHandler      = require("./middleware/errorHandler");
+const adminRoutes = require("./routes/admin");
+
 
 require("./db"); // initialize database on startup
 
@@ -37,6 +39,7 @@ app.use("/api/auth", authRoutes);
 // requireAuth middleware checks the token before every request
 app.use("/api/transactions", requireAuth, transactionRoutes);
 app.use("/api/settings",     requireAuth, settingsRoutes);
+app.use("/api/admin", requireAuth, adminRoutes);
 
 // ── CATCH-ALL — serve the frontend ─────────────────────────
 app.get("{*splat}", (req, res) => {
