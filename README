@@ -1,0 +1,100 @@
+# 💰 Expense Tracker
+
+A modern, responsive personal finance dashboard built with **HTML5, CSS3, and Vanilla JavaScript (ES6)**. Track income and expenses, visualize spending with interactive charts, and manage your financial life — all stored locally in your browser.
+
+![Status](https://img.shields.io/badge/status-active-22C55E) ![License](https://img.shields.io/badge/license-MIT-3B82F6)
+
+---
+
+## ✨ Project Overview
+
+Expense Tracker is a single-page web app that helps you record transactions, categorize spending, and monitor your overall financial health through a clean glassmorphism-style dashboard. All data persists in **Local Storage**, so your transactions are still there when you come back.
+
+---
+
+## 🚀 Features
+
+- **Add / Edit / Delete transactions** with name, amount, category, type, and date
+- **Real-time dashboard** — total balance, income, expenses, and savings %, with animated counters
+- **Category system** — 11 categories, each with its own icon and color
+- **Transaction history** — search, filter (by type/category), and sort (newest, oldest, highest, lowest amount)
+- **Analytics charts** (Chart.js) — expense-by-category pie chart, monthly expenses bar chart, income vs. expenses line chart — all auto-updating
+- **Quick statistics** — highest expense, most-used category, monthly net summary
+- **Monthly budget goal** with a live progress bar
+- **CSV export & import** of all transactions
+- **Printable PDF report** generation
+- **Dark / Light mode** toggle (persisted)
+- **Keyboard shortcuts** — `Ctrl/Cmd + K` to focus search, `Esc` to close modals
+- **Form validation** with inline error states and toast notifications
+- **Delete confirmation modal** to prevent accidental data loss
+- **Fully responsive** — desktop, tablet, and mobile layouts via CSS Grid
+
+---
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| HTML5 | Semantic structure |
+| CSS3 | Glassmorphism styling, animations, responsive grid |
+| Vanilla JavaScript (ES6) | App logic, state management |
+| [Chart.js](https://www.chartjs.org/) | Pie, bar, and line charts |
+| Local Storage API | Client-side data persistence |
+
+---
+
+## 📦 Installation
+
+No build tools or dependencies required.
+
+```bash
+# Clone or download the project
+git clone https://github.com/your-username/expense-tracker.git
+
+# Navigate into the folder
+cd expense-tracker
+
+# Open in your browser
+open index.html      # macOS
+start index.html     # Windows
+```
+
+Or simply double-click `index.html`, or serve it with any static server (e.g. `npx serve`).
+
+---
+
+## 📂 Folder Structure
+
+```
+expense-tracker/
+│── index.html
+│── style.css
+│── script.js
+│── assets/
+│   ├── icons/
+│   ├── images/
+│   └── logo/
+└── README.md
+```
+
+---
+
+## 📸 Screenshots
+
+> Add screenshots of your dashboard, transaction form, and charts here once deployed.
+
+---
+
+## 🔮 Future Improvements
+
+- Multi-currency support with live exchange rates
+- Recurring transaction automation
+- Cloud sync / account-based storage
+- Push notifications for budget limits
+- Receipt photo attachments
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — free to use, modify, and distribute.
