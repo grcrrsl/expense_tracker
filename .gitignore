@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Build folders
+dist/
+build/
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
