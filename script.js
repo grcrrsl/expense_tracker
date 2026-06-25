@@ -470,8 +470,8 @@ function renderStatistics() {
     const mostUsed = Object.keys(counts).reduce((a, b) =>
       counts[a] > counts[b] ? a : b,
     );
-    document.getElementById("mostUsedCategory").textContent =
-      `${CATEGORIES[mostUsed].icon} ${mostUsed}`;
+   document.getElementById("mostUsedCategory").innerHTML =
+     `<i class="${CATEGORIES[mostUsed].icon}"></i> ${mostUsed}`;
   } else {
     document.getElementById("mostUsedCategory").textContent = "—";
   }
